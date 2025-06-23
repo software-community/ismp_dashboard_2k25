@@ -15,6 +15,16 @@ export default function Dashboard() {
   const ref2 = useScrollAnimation(() => setShow2(true));
   const ref3 = useScrollAnimation(() => setShow3(true));
 
+  // Handler for cybersec button
+  const handleCybersecClick = async () => {
+    try {
+      await fetch('/api/me/t2/start', { method: 'POST' });
+    } catch (e) {
+      // Optionally handle error
+    }
+    window.open('/webGL builds/lvl2/index.html', '_blank');
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-screen relative">
       {/* Level 1 Section */}
@@ -70,14 +80,13 @@ export default function Dashboard() {
               delaySpeed={1000}
             />
           </p>
-          <a
-            href="/webGL builds/lvl2/index.html"
-            target="_blank"
+          <button
+            onClick={handleCybersecClick}
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
           >
             <span className="z-10 relative">cybersec</span>
             <span className="absolute left-0 top-0 w-full h-full bg-blue-400 opacity-30 animate-liquidFill" style={{ zIndex: 1 }} />
-          </a>
+          </button>
         </div>
       </div>
       {/* Level 3 Section */}

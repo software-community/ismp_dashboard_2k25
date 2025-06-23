@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/ISMP EXPORT.loader.js";
+      var loaderUrl = buildUrl + "/webgl.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/ISMP EXPORT.data",
-        frameworkUrl: buildUrl + "/ISMP EXPORT.framework.js",
-        codeUrl: buildUrl + "/ISMP EXPORT.wasm",
+        dataUrl: buildUrl + "/webgl.data",
+        frameworkUrl: buildUrl + "/webgl.framework.js",
+        codeUrl: buildUrl + "/webgl.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "ISMP GAME",
@@ -123,16 +123,5 @@
       document.body.appendChild(script);
 
     </script>
-    <script>
-      window.submitTime = (totalTime) => {
-        console.log("Submitting time:", totalTime);
-        fetch('/api/leaderboard/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ totalTime })
-        });
-      };
-    </script>
-
   </body>
 </html>
