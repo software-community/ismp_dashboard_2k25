@@ -79,9 +79,22 @@ export default function LeaderboardPage() {
                         <div className="text-xs text-gray-500">{player.entryNumber ?? 'N/A'}</div>
                       </div>
                     </div>
+                    {/* Level completion icons */}
+                    {/* <div className="flex items-center space-x-2 mx-4">
+                      <span title="Level 1" className='text-sm text-gray-600'>Level 1: {player.lvl1?.complete ? '✅' : '❌'}</span>
+                      <span title="Level 2" className='text-sm text-gray-600'>Level 2: {player.lvl2?.complete ? '✅' : '❌'}</span>
+                      <span title="Level 3" className='text-sm text-gray-600'>Level 3: {player.lvl3?.complete ? '✅' : '❌'}</span>
+                    </div> */}
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-800">{player.TimeTaken ?? 'N/A'}</div>
-                      <div className="text-sm text-gray-600">Time Taken</div>
+                      <div className="text-2xl font-bold text-gray-800">
+                        {typeof player.TimeTaken === 'number' ? `${(player.TimeTaken / 1000).toFixed(2)}s` : 'N/A'}
+                      </div>
+                      <div className="text-sm text-gray-600">Total Time Taken</div>
+                      <div className="text-xs text-gray-500">
+                        {player.lvl1?.TimeTaken ? `L1: ${(player.lvl1.TimeTaken / 1000).toFixed(2)}s ` : ''}
+                        {player.lvl2?.TimeTaken ? `L2: ${(player.lvl2.TimeTaken / 1000).toFixed(2)}s ` : ''}
+                        {player.lvl3?.TimeTaken ? `L3: ${(player.lvl3.TimeTaken / 1000).toFixed(2)}s` : ''}
+                      </div>
                     </div>
                   </div>
                 ))
