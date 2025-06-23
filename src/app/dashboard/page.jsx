@@ -18,7 +18,7 @@ export default function Dashboard() {
   // Handler for cybersec button
   const handleCybersecClick = async () => {
     try {
-      await fetch('/api/me/t2/start', { method: 'POST' });
+      await fetch('/api/start/2', { method: 'POST' });
     } catch (e) {
       // Optionally handle error
     }

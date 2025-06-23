@@ -6,8 +6,12 @@ const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || 'ismp_dashboard';
 const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 
-export async function POST(request) {
+export async function POST(request, { params }) {
   try {
+    const { level } = params;
+    if (!level) {
+      return NextResponse.json({ error: 'Level not specified' }, { status: 400 });
+    }
     // Get JWT from cookies
     const token = request.cookies.get('token')?.value;
     if (!token) {
@@ -24,28 +28,21 @@ export async function POST(request) {
     await client.connect();
     const db = client.db(dbName);
     const users = db.collection('users');
-    // Find user
-    const user = await users.findOne({ entryNumber });
-    if (!user) {
-      await client.close();
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-    // Calculate time taken for lvl2
-    // Assume user.start2 is the timestamp when lvl2 started (should be set when user starts lvl2)
-    const start2 = user.start2;
-    if (!start2) {
-      await client.close();
-      return NextResponse.json({ error: 'Level 2 start time not set' }, { status: 400 });
-    }
+    // Set lvl{level}.startTime to now, reset other fields
     const now = Date.now();
-    const timeTaken = now - start2; // in milliseconds
-    // Update t2 in DB
+    const lvlKey = `lvl${level}`;
+    const update = {
+      [`${lvlKey}.startTime`]: now,
+      [`${lvlKey}.endTime`]: null,
+      [`${lvlKey}.TimeTaken`]: null,
+      [`${lvlKey}.complete`]: false
+    };
     await users.updateOne(
       { entryNumber },
-      { $set: { t2: timeTaken } }
+      { $set: update }
     );
     await client.close();
-    return NextResponse.json({ success: true, t2: timeTaken });
+    return NextResponse.json({ success: true, [lvlKey]: { startTime: now, endTime: null, TimeTaken: null, complete: false } });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
