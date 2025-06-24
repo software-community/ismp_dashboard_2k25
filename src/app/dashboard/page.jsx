@@ -21,7 +21,7 @@ export default function Dashboard() {
     } catch (e) {
       // Optionally handle error
     }
-    window.open('/webGL builds/lvl2/index.html', '_blank');
+    window.open('/webGL builds/lvl1/index.html', '_blank');
   };
   const handleLvl2Click = async () => {
     try {
@@ -37,7 +37,7 @@ export default function Dashboard() {
     } catch (e) {
       // Optionally handle error
     }
-    window.open('/webGL builds/lvl2/index.html', '_blank');
+    window.open('/webGL builds/lvl3/index.html', '_blank');
   };
 
   return (
