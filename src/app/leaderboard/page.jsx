@@ -38,13 +38,13 @@ export default function LeaderboardPage() {
             </button>
           </Link>
           <div className="neumorphic-header rounded-3xl p-8">
-            <div className="flex items-center justify-center space-x-4 mb-4">
-              <span className="text-4xl">🏆</span>
-              <h1 className="text-4xl font-bold text-gray-800">Leaderboard</h1>
-              <span className="text-4xl">🏆</span>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-4">
+              <span className="text-2xl md:text-4xl">🏆</span>
+              <h1 className="text-2xl md:text-4xl font-bold text-gray-800 text-center">Leaderboard</h1>
+              <span className="text-2xl md:text-4xl">🏆</span>
             </div>
-            <p className="text-gray-600 text-lg">Top performers</p>
-            <p className="text-gray-600 text-md mt-2">Total Players: {totalPlayers}</p>
+            <p className="text-gray-600 text-sm md:text-lg text-center">Top performers</p>
+            <p className="text-gray-600 text-xs md:text-md mt-2 text-center">Total Players: {totalPlayers}</p>
           </div>
         </div>
 
@@ -60,11 +60,11 @@ export default function LeaderboardPage() {
                 leaderboardData.map((player, index) => (
                   <div
                     key={player._id || player.entryNumber || index}
-                    className={`neumorphic-player-card flex items-center justify-between p-6 rounded-2xl transition-all duration-200 hover:scale-105 ${
+                    className={`neumorphic-player-card flex flex-col md:flex-row items-start md:items-center justify-between p-4 md:p-6 rounded-2xl transition-all duration-200 hover:scale-105 gap-4 md:gap-0 ${
                       index === 0 ? 'border-2 border-yellow-400' : ''
                     }`}
                   >
-                    <div className="flex items-center space-x-4">
+                    <div className="flex flex-row items-center gap-2 md:gap-4 w-full md:w-auto">
                       <div className={`text-2xl font-bold ${
                         index === 0 ? 'text-yellow-500' : 
                         index === 1 ? 'text-gray-400' : 
@@ -72,24 +72,30 @@ export default function LeaderboardPage() {
                       }`}>
                         {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index+1}`}
                       </div>
-                      <div className="text-3xl">👤</div>
+                      <div className="text-2xl md:text-3xl">👤</div>
                       <div>
-                        <div className="font-semibold text-gray-800 text-lg">{player.name || '-'}</div>
-                        <div className="text-sm text-gray-600">{player.department || ''}</div>
+                        <div className="font-semibold text-gray-800 text-base md:text-lg">{player.name || '-'}</div>
+                        <div className="text-xs md:text-sm text-gray-600">{player.department || ''}</div>
                         <div className="text-xs text-gray-500">{player.entryNumber ?? 'N/A'}</div>
                       </div>
                     </div>
-                    {/* Level completion icons */}
-                    {/* <div className="flex items-center space-x-2 mx-4">
-                      <span title="Level 1" className='text-sm text-gray-600'>Level 1: {player.lvl1?.complete ? '✅' : '❌'}</span>
-                      <span title="Level 2" className='text-sm text-gray-600'>Level 2: {player.lvl2?.complete ? '✅' : '❌'}</span>
-                      <span title="Level 3" className='text-sm text-gray-600'>Level 3: {player.lvl3?.complete ? '✅' : '❌'}</span>
-                    </div> */}
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-800">
+                    {/* Level completion icons - responsive */}
+                    <div className="flex flex-row items-center gap-2 md:gap-4 w-full md:w-auto justify-start md:justify-center">
+                      <span title="Level 1" className='text-xs md:text-sm text-gray-600 flex items-center gap-1'>
+                        <span className="hidden md:inline">Level 1:</span> {player.lvl1?.complete ? '✅' : '❌'}
+                      </span>
+                      <span title="Level 2" className='text-xs md:text-sm text-gray-600 flex items-center gap-1'>
+                        <span className="hidden md:inline">Level 2:</span> {player.lvl2?.complete ? '✅' : '❌'}
+                      </span>
+                      <span title="Level 3" className='text-xs md:text-sm text-gray-600 flex items-center gap-1'>
+                        <span className="hidden md:inline">Level 3:</span> {player.lvl3?.complete ? '✅' : '❌'}
+                      </span>
+                    </div>
+                    <div className="text-right w-full md:w-auto flex flex-col items-end">
+                      <div className="text-xl md:text-2xl font-bold text-gray-800">
                         {typeof player.TimeTaken === 'number' ? `${(player.TimeTaken / 1000).toFixed(2)}s` : 'N/A'}
                       </div>
-                      <div className="text-sm text-gray-600">Total Time Taken</div>
+                      <div className="text-xs md:text-sm text-gray-600">Total Time Taken</div>
                       <div className="text-xs text-gray-500">
                         {player.lvl1?.TimeTaken ? `L1: ${(player.lvl1.TimeTaken / 1000).toFixed(2)}s ` : ''}
                         {player.lvl2?.TimeTaken ? `L2: ${(player.lvl2.TimeTaken / 1000).toFixed(2)}s ` : ''}
