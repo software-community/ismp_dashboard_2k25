@@ -15,10 +15,25 @@ export default function Dashboard() {
   const ref2 = useScrollAnimation(() => setShow2(true));
   const ref3 = useScrollAnimation(() => setShow3(true));
 
-  // Handler for cybersec button
-  const handleCybersecClick = async () => {
+  const handleLvl1Click = async () => {
+    try {
+      await fetch('/api/start/1', { method: 'POST' });
+    } catch (e) {
+      // Optionally handle error
+    }
+    window.open('/webGL builds/lvl2/index.html', '_blank');
+  };
+  const handleLvl2Click = async () => {
     try {
       await fetch('/api/start/2', { method: 'POST' });
+    } catch (e) {
+      // Optionally handle error
+    }
+    window.open('/webGL builds/lvl2/index.html', '_blank');
+  };
+  const handleLvl3Click = async () => {
+    try {
+      await fetch('/api/start/3', { method: 'POST' });
     } catch (e) {
       // Optionally handle error
     }
@@ -48,15 +63,16 @@ export default function Dashboard() {
               delaySpeed={10000}
             />
           </p>
-          <a
-            href="/webGL builds/lvl2/index.html"
+          <button
+          onClick={handleLvl1Click}
+            href="/webGL builds/lvl1/index.html"
             target="_blank"
             className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
           >
             <span className="z-10 relative">Enter the Forest</span>
             {/* Liquid fill effect */}
             <span className="absolute left-0 top-0 w-full h-full bg-green-400 opacity-30 animate-liquidFill" style={{ zIndex: 1 }} />
-          </a>
+          </button>
         </div>
       </div>
       {/* Level 2 Section */}
@@ -81,7 +97,7 @@ export default function Dashboard() {
             />
           </p>
           <button
-            onClick={handleCybersecClick}
+            onClick={handleLvl2Click}
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
           >
             <span className="z-10 relative">cybersec</span>
@@ -110,14 +126,15 @@ export default function Dashboard() {
               delaySpeed={1000}
             />
           </p>
-          <a
+          <button
+          onClick={handleLvl3Click}
             href="/webGL builds/lvl3/index.html"
             target="_blank"
             className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
           >
             <span className="z-10 relative">level 3</span>
             <span className="absolute left-0 top-0 w-full h-full bg-purple-400 opacity-30 animate-liquidFill" style={{ zIndex: 1 }} />
-          </a>
+          </button>
         </div>
       </div>
       {/* <Footer /> */}
