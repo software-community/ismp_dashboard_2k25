@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/webgl.loader.js";
+      var loaderUrl = buildUrl + "/WebGLExport.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/webgl.data",
-        frameworkUrl: buildUrl + "/webgl.framework.js",
-        codeUrl: buildUrl + "/webgl.wasm",
+        dataUrl: buildUrl + "/WebGLExport.data",
+        frameworkUrl: buildUrl + "/WebGLExport.framework.js",
+        codeUrl: buildUrl + "/WebGLExport.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "ISMP GAME",
@@ -114,12 +114,21 @@
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
-
+                unityInstance.SetFullscreen(1);
               }).catch((message) => {
                 alert(message);
               });
             };
-
+      function onGameComplete(level) {
+        fetch("/api/end/" + level, { method: "POST" })
+          .then(() => {
+            window.location.href = "/dashboard";
+          })
+          .catch((error) => {
+            alert("Error ending game:", error);
+            window.location.href = "/dashboard";
+          });
+      }
       document.body.appendChild(script);
 
     </script>
