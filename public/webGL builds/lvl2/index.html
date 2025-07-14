@@ -114,23 +114,21 @@
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
-                unityInstance.SetFullscreen(1);
+
               }).catch((message) => {
                 alert(message);
               });
             };
+
+      document.body.appendChild(script);
       function onGameComplete(level) {
-        fetch("/api/end/" + level, { method: "POST" })
-          .then(() => {
+        fetch("/api/end/" + level, { method: "POST" }).then(() => {
             window.location.href = "/dashboard";
-          })
-          .catch((error) => {
+          }).catch((error) => {
             alert("Error ending game:", error);
-            window.location.href = "/dashboard";
+            window.location.href = "/dashboard";         
           });
       }
-      document.body.appendChild(script);
-
     </script>
   </body>
 </html>

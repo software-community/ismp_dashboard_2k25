@@ -11,6 +11,12 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(null);
+    // Entry number validation: must match 2025XYZ1234 format
+    const entryNumberPattern = /^2025[A-Z]{3}\d{4}$/;
+    if (!entryNumberPattern.test(entryNumber)) {
+      setStatus("Entry Number must be in the format 2025XYZ1234");
+      return;
+    }
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

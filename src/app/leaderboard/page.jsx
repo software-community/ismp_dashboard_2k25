@@ -8,8 +8,11 @@ export default function LeaderboardPage() {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [totalPlayers, setTotalPlayers] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [refreshTimer, setRefreshTimer] = useState(30);
 
   useEffect(() => {
+    let intervalId;
+    let timerId;
     async function fetchLeaderboard() {
       setLoading(true);
       try {
@@ -25,6 +28,17 @@ export default function LeaderboardPage() {
       setLoading(false);
     }
     fetchLeaderboard();
+    intervalId = setInterval(() => {
+      fetchLeaderboard();
+      setRefreshTimer(30);
+    }, 30000); // 30 seconds
+    timerId = setInterval(() => {
+      setRefreshTimer((prev) => (prev > 0 ? prev - 1 : 30));
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+      clearInterval(timerId);
+    };
   }, []);
 
   return (
@@ -37,6 +51,7 @@ export default function LeaderboardPage() {
               Back to Home
             </button>
           </Link>
+          <div className="text-center text-gray-500 text-sm mb-2">Refreshing in {refreshTimer}s</div>
           <div className="neumorphic-header rounded-3xl p-8">
             <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-4">
               <span className="text-2xl md:text-4xl">🏆</span>
