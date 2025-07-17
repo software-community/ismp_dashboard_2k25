@@ -11,10 +11,10 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(null);
-    // Entry number validation: must match 2025XYZ1234 format
-    const entryNumberPattern = /^2025[A-Z]{3}\d{4}$/;
+    // Entry number validation: must match 2025XYZ1234 or 2025xyz1234 format (all caps or all small, not mixed)
+    const entryNumberPattern = /^2025([A-Z]{3}|[a-z]{3})\d{4}$/;
     if (!entryNumberPattern.test(entryNumber)) {
-      setStatus("Entry Number must be in the format 2025XYZ1234");
+      setStatus("Entry Number must be in the format 2025XYZ1234 or 2025xyz1234");
       return;
     }
     const res = await fetch("/api/register", {
@@ -50,17 +50,18 @@ export default function Form() {
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
           required
         />
         <input
           type="text"
-          placeholder="Entry Number"
+          placeholder="2025ABC1234 or 2025abc1234"
           value={entryNumber}
           onChange={(e) => setEntryNumber(e.target.value)}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
           required
         />
+          <span className="text-gray-400 p-1 -mt-4">Enter your entry number in the given format </span>
         <button
           type="submit"
           className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition w-full disabled:opacity-50 disabled:cursor-not-allowed"

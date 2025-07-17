@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGLExport.loader.js";
+      var loaderUrl = buildUrl + "/WebGlExport.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/WebGLExport.data",
-        frameworkUrl: buildUrl + "/WebGLExport.framework.js",
-        codeUrl: buildUrl + "/WebGLExport.wasm",
+        dataUrl: buildUrl + "/WebGlExport.data",
+        frameworkUrl: buildUrl + "/WebGlExport.framework.js",
+        codeUrl: buildUrl + "/WebGlExport.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "ISMP GAME",
@@ -121,14 +121,7 @@
             };
 
       document.body.appendChild(script);
-      function onGameComplete(level) {
-        fetch("/api/end/" + level, { method: "POST" }).then(() => {
-            window.location.href = "/dashboard";
-          }).catch((error) => {
-            alert("Error ending game:", error);
-            window.location.href = "/dashboard";         
-          });
-      }
+
     </script>
   </body>
 </html>
