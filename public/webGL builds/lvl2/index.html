@@ -121,6 +121,14 @@
             };
 
       document.body.appendChild(script);
+      function onGameComplete(level) {
+        fetch("/api/end/" + level, { method: "POST" }).then(() => {
+            window.location.href = "/dashboard";
+          }).catch((error) => {
+            alert("Error ending game:", error);
+            window.location.href = "/dashboard";         
+          });
+      }
 
     </script>
   </body>
