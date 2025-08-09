@@ -28,14 +28,8 @@ export async function POST(request, { params }) {
     await client.connect();
     const db = client.db(dbName);
     const users = db.collection('users');
-    // Check if user has already completed this level
-    const user = await users.findOne({ entryNumber });
     const lvlKey = `lvl${level}`;
-    if (user && user[lvlKey]?.complete) {
-      await client.close();
-      return NextResponse.json({ error: `Level ${level} already completed. You cannot restart this level.` }, { status: 403 });
-    }
-    // Set lvl{level}.startTime to now, reset other fields
+    // Set lvl{level}.startTime to now, reset other fields (allow restart even if previously completed)
     const now = Date.now();
     const update = {
       [`${lvlKey}.startTime`]: now,

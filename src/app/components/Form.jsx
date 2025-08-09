@@ -12,9 +12,9 @@ export default function Form() {
     e.preventDefault();
     setStatus(null);
     // Entry number validation: must match 2025XYZ1234 or 2025xyz1234 format (all caps or all small, not mixed)
-    const entryNumberPattern = /^2025([A-Z]{3}|[a-z]{3})\d{4}$/;
+    const entryNumberPattern = /^20[0-9]{2}([A-Z]{3}|[a-z]{3})\d{4}$/;
     if (!entryNumberPattern.test(entryNumber)) {
-      setStatus("Entry Number must be in the format 2025XYZ1234 or 2025xyz1234");
+      setStatus("Entry Number must be in the format 2024XYZ1234 or 2024xyz1234");
       return;
     }
     const res = await fetch("/api/register", {

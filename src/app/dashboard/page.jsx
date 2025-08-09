@@ -43,10 +43,6 @@ export default function Dashboard() {
   }, []);
 
   const handleLvl1Click = async () => {
-    if (lvlStatus.lvl1.completed) {
-      setErrorMsg("You have already completed lvl 1.");
-      return;
-    }
     try {
       const res = await fetch("/api/start/1", { method: "POST" });
       const data = await res.json();
@@ -60,10 +56,6 @@ export default function Dashboard() {
     }
   };
   const handleLvl2Click = async () => {
-    if (lvlStatus.lvl2.completed) {
-      setErrorMsg("You have already completed lvl 2.");
-      return;
-    }
     try {
       const res = await fetch("/api/start/2", { method: "POST" });
       const data = await res.json();
@@ -77,10 +69,6 @@ export default function Dashboard() {
     }
   };
   const handleLvl3Click = async () => {
-    if (lvlStatus.lvl3.completed) {
-      setErrorMsg("You have already completed lvl 3.");
-      return;
-    }
     try {
       const res = await fetch("/api/start/3", { method: "POST" });
       const data = await res.json();
@@ -127,7 +115,6 @@ export default function Dashboard() {
             href="/webGL builds/lvl1/index.html"
             target="_blank"
             className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-            disabled={lvlStatus.lvl1.completed}
           >
             <span className="z-10 relative">Enter the Forest</span>
             {/* Liquid fill effect */}
@@ -163,7 +150,6 @@ export default function Dashboard() {
           <button
             onClick={handleLvl2Click}
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-            disabled={lvlStatus.lvl2.completed}
           >
             <span className="z-10 relative">Break the wall</span>
             <span
@@ -200,7 +186,6 @@ export default function Dashboard() {
             href="/webGL builds/lvl3/index.html"
             target="_blank"
             className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-            disabled={lvlStatus.lvl3.completed}
           >
             <span className="z-10 relative">Mine the Blocks</span>
             <span
